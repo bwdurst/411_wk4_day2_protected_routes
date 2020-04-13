@@ -8,18 +8,33 @@ import Login from './components/Login'
 
 // Write checkAuth function here
 // Check the cookies for a cookie called "loggedIn"
+// const [cookies] = useCookies(['isLogged']);
 
+const checkAuth = () => {
+    if (cookie.parse('loggedIn=true')) {
+        return true
+    }
+    return false
+}
 
 // Write ProtectedRoute function here
-
+const ProtectedRoute = ({ ...theRest }) => {
+    if (checkAuth()) {
+        return <Route {...theRest} />
+    }
+    else {
+        return <Redirect to={{ pathname: '/login' }} />
+    }
+}
 
 const Router = () => {
+
     return (
         <Switch>
             <Route path="/login" component={Login} />
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/car/:id" component={Car} />
+            <ProtectedRoute exact path="/" component={Home} />
+            <ProtectedRoute path="/about" component={About} />
+            <ProtectedRoute path="/car/:id" component={Car} />
         </Switch>
     );
 };

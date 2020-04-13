@@ -5,6 +5,7 @@ import {
   Button,
   Container
 } from '@material-ui/core'
+import cookie from 'cookie'
 
 class App extends Component {
   state = {
@@ -21,7 +22,10 @@ class App extends Component {
   login = (e) => {
     e.preventDefault()
     // set cookie here
-    // set loggedIn = true and max-age = 60*1000 (one minute)
+
+    document.cookie = cookie.serialize('loggedIn', 'true', {
+      maxAge: 60 * 1000
+    })
 
     window.location.replace("/")
   }

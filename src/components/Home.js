@@ -4,7 +4,6 @@ import cars from '../cars.json'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
-    console.log('CARS', cars)
     return (
         <div className="card-container">
             {cars.map((car, idx) => (
